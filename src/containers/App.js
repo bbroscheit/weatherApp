@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css';
 import Nav from '../components/Nav';
 import Cards from '../components/Cards';
+import About from '../components/About.jsx';
+import Ciudad from '../components/Ciudad.jsx';
+import { Route } from 'react-router-dom';
 
 export default function App() {
   const [cities, setCities] = React.useState([]);
@@ -38,14 +41,23 @@ export default function App() {
 
     }
 
+    function onFilter(ciudadId) {
+      let ciudad = cities.filter(c => c.id === parseInt(ciudadId));
+      if(ciudad.length > 0) {
+          return ciudad[0];
+      } else {
+          return "ciudad no encontrada";
+      }
+    }
+
   return (
     <div className="App">
-      <Nav onSearch={onSearch}/>
-      <div>
-        <Cards 
-          cities={cities}
-          onClose={onClose}/>
-      </div>
+      
+      
+        <Route path="/"  render= { () => <Nav onSearch={onSearch}/>} />
+        <Route path="/about" exact component ={About} />
+        <Route path="/" exact render={() => <Cards cities={cities} onClose={onClose}/>} />
+        <Route path="/ciudad/:ciudadId" exact render={({match}) => <Ciudad city={onFilter(match.params.ciudadId)}/>}/>
     </div>
   );
 }

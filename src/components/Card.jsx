@@ -1,6 +1,7 @@
 import React from 'react';
 import Style from '../modules/Card.module.css';
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 
 function Card({min,max,name,img,onClose,id}) {
@@ -11,7 +12,9 @@ function Card({min,max,name,img,onClose,id}) {
         <AiOutlineCloseCircle />
       </button>
       <div>
-        <h1>{name}</h1>
+        <Link to={`/Ciudad/${id}`} className={Style.link}>
+          <h1 className={Style.titulo}>{name}</h1>
+        </Link>
       </div>
       <div className={Style.data}>
         <div className={Style.containerDatos}>
@@ -25,7 +28,7 @@ function Card({min,max,name,img,onClose,id}) {
           </div>
         </div>
         <div>
-            <img clasName={Style.img} src={`http://openweathermap.org/img/wn/${img}@2x.png`} alt="icono" />
+            <img className={Style.img} src={`http://openweathermap.org/img/wn/${img}@2x.png`} alt="icono" />
         </div>   
       </div>
     </div>
